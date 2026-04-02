@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SearchIndexRouteImport } from './routes/search.index'
+import { Route as RecipesIndexRouteImport } from './routes/recipes.index'
 import { Route as FavoritesIndexRouteImport } from './routes/favorites.index'
-import { Route as CuisineIndexRouteImport } from './routes/cuisine.index'
+import { Route as CuisinesIndexRouteImport } from './routes/cuisines.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchIndexRoute = SearchIndexRouteImport.update({
+  id: '/search/',
+  path: '/search/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecipesIndexRoute = RecipesIndexRouteImport.update({
+  id: '/recipes/',
+  path: '/recipes/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FavoritesIndexRoute = FavoritesIndexRouteImport.update({
@@ -23,40 +35,48 @@ const FavoritesIndexRoute = FavoritesIndexRouteImport.update({
   path: '/favorites/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CuisineIndexRoute = CuisineIndexRouteImport.update({
-  id: '/cuisine/',
-  path: '/cuisine/',
+const CuisinesIndexRoute = CuisinesIndexRouteImport.update({
+  id: '/cuisines/',
+  path: '/cuisines/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/cuisine/': typeof CuisineIndexRoute
+  '/cuisines/': typeof CuisinesIndexRoute
   '/favorites/': typeof FavoritesIndexRoute
+  '/recipes/': typeof RecipesIndexRoute
+  '/search/': typeof SearchIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/cuisine': typeof CuisineIndexRoute
+  '/cuisines': typeof CuisinesIndexRoute
   '/favorites': typeof FavoritesIndexRoute
+  '/recipes': typeof RecipesIndexRoute
+  '/search': typeof SearchIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/cuisine/': typeof CuisineIndexRoute
+  '/cuisines/': typeof CuisinesIndexRoute
   '/favorites/': typeof FavoritesIndexRoute
+  '/recipes/': typeof RecipesIndexRoute
+  '/search/': typeof SearchIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cuisine/' | '/favorites/'
+  fullPaths: '/' | '/cuisines/' | '/favorites/' | '/recipes/' | '/search/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cuisine' | '/favorites'
-  id: '__root__' | '/' | '/cuisine/' | '/favorites/'
+  to: '/' | '/cuisines' | '/favorites' | '/recipes' | '/search'
+  id: '__root__' | '/' | '/cuisines/' | '/favorites/' | '/recipes/' | '/search/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CuisineIndexRoute: typeof CuisineIndexRoute
+  CuisinesIndexRoute: typeof CuisinesIndexRoute
   FavoritesIndexRoute: typeof FavoritesIndexRoute
+  RecipesIndexRoute: typeof RecipesIndexRoute
+  SearchIndexRoute: typeof SearchIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,6 +88,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/search/': {
+      id: '/search/'
+      path: '/search'
+      fullPath: '/search/'
+      preLoaderRoute: typeof SearchIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recipes/': {
+      id: '/recipes/'
+      path: '/recipes'
+      fullPath: '/recipes/'
+      preLoaderRoute: typeof RecipesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/favorites/': {
       id: '/favorites/'
       path: '/favorites'
@@ -75,11 +109,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavoritesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cuisine/': {
-      id: '/cuisine/'
-      path: '/cuisine'
-      fullPath: '/cuisine/'
-      preLoaderRoute: typeof CuisineIndexRouteImport
+    '/cuisines/': {
+      id: '/cuisines/'
+      path: '/cuisines'
+      fullPath: '/cuisines/'
+      preLoaderRoute: typeof CuisinesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -87,8 +121,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CuisineIndexRoute: CuisineIndexRoute,
+  CuisinesIndexRoute: CuisinesIndexRoute,
   FavoritesIndexRoute: FavoritesIndexRoute,
+  RecipesIndexRoute: RecipesIndexRoute,
+  SearchIndexRoute: SearchIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

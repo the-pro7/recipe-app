@@ -100,7 +100,7 @@
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
-    --bg: #16171d;
+    --bg: #f1f1f1;
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -118,6 +118,7 @@
 
 #root {
   min-height: 100dvh;
+  background-color: var(--bg);
 }
 
 body {
@@ -125,7 +126,23 @@ body {
   padding: 0;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
+  .nav-link {
+    @apply inline-flex items-center gap-2 [&.active]:font-bold [&.active]:bg-slate-600 [&.active]:text-white bg-slate-200 text-slate-700 rounded-full px-5 py-2;
+  }
+
+  .gallery-image {
+    @apply w-55 h-55 rounded-lg object-cover brightness-75 hover:brightness-100 transition-all cursor-pointer;
+  }
+}
 
 @theme inline {
   --font-heading: var(--font-sans);

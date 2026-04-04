@@ -142,6 +142,10 @@ body {
   .gallery-image {
     @apply w-55 h-55 rounded-lg object-cover brightness-75 hover:brightness-100 transition-all cursor-pointer;
   }
+
+  .page-header {
+    @apply text-5xl text-slate-800 font-bold;
+  }
 }
 
 @theme inline {

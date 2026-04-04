@@ -5,5 +5,7 @@ export const Route = createFileRoute('/favorites/')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/favorites/"!</div>
+  return <main className='mt-10'>
+    <h1 className='page-header'>Your favorite recipes right here!</h1>
+  </main>
 }

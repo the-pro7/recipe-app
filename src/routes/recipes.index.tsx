@@ -5,5 +5,7 @@ export const Route = createFileRoute('/recipes/')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/recipes/"!</div>
+  return <main className='mt-10'>
+    <h1 className='page-header'>Recipe catalogue</h1>
+  </main>
 }

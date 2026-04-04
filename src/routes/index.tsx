@@ -1,18 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "../components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Carrot } from "@hugeicons/core-free-icons";
+import { Chef } from "@hugeicons/core-free-icons";
 import Cook from "../components/cook";
 import Favorite from "../components/favorite";
 import { pickedRecipeStats } from "../data/static";
 import StatCard from "../components/stat-card";
 import Waiting from "../components/waiting";
+import Testimonial from "../components/testimonial";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
+  loader: async () => {
+
+  }
 });
 
-const cuisines = [
+export const cuisines = [
   "Asian",
   "Italian",
   "Mexican",
@@ -25,57 +29,33 @@ const cuisines = [
   "American",
 ];
 
-const colors = [
-  "bg-red-500",
-  "bg-green-500",
-  "bg-blue-500",
-  "bg-yellow-500",
-  "bg-purple-500",
-  "bg-pink-500",
-  "bg-indigo-500",
-  "bg-teal-500",
-  "bg-orange-500",
-  "bg-gray-500",
-];
-
 function RouteComponent() {
   return (
     <main>
-      <section className="mt-10 flex justify-between">
+      <section className="my-10 flex items-center justify-between h-[70vh]">
         <div>
-          <h1 className="text-7xl font-black max-w-xl text-slate-800">
-            Let's make your next <span className="text-blue-500">meal</span>
+          <h1 className="text-6xl font-bold max-w-xl leading-15 text-slate-800">
+            Cooking made fun and easy: Unleash your inner chef
           </h1>
-          <p className="text-slate-600 max-w-md wrap-break-word text-xl mt-5">
-            All your meal recipes in one place, with concise and easy to follow
-            instructions no matter the level of difficulty of the dish.
+          <p className="text-xl font-light max-w-md mt-5">
+            Discover over{" "}
+            <span className="text-blue-500 font-semibold">100+</span> delicious
+            recipes from all around the world, tailored to your taste and
+            dietary preferences.
           </p>
           <div className="flex flex-col gap-5">
             <Button size="lg" asChild className="mt-10 w-fit">
               <Link to="/recipes" className="inline-flex items-center gap-2">
                 <HugeiconsIcon
-                  icon={Carrot}
+                  icon={Chef}
                   className="animate-pulse delay-500"
                 />
-                Get Started
+                Let's Cook!
               </Link>
             </Button>
-            <p className="font-semibold text-lg text-slate-800">
-              Got a specific cuisine in mind?
-            </p>
-            <div className="inline-flex gap-4 max-w-md overflow-x-scroll no-scrollbar">
-              {cuisines.map((cuisine, index) => (
-                <div
-                  key={cuisine}
-                  className={`${colors[index % colors.length]} w-fit text-white rounded-sm px-3 py-1 cursor-pointer`}
-                >
-                  <h2 className="text-md font-light">{cuisine}</h2>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
-        <div className="relative">
+        {/* <div className="relative">
           <div className="w-100 h-100 aspect-square rounded-full translate-x-1 delay-500 overflow-clip">
             <img
               src="/assets/main-bg.jpg"
@@ -86,6 +66,21 @@ function RouteComponent() {
           <div className="w-50 h-50 aspect-square rounded-full -translate-x-50 -translate-y-50 delay-500 overflow-clip">
             <img src="/assets/secondary-bg.jpg" alt="Secondary background" />
           </div>
+        </div> */}
+        <div className="relative">
+          <Testimonial
+            imageUrl="/assets/chef-2.jpg"
+            transformStyles="top-13 -left-8 -translate-x-1/5"
+            testimonial="This website has transformed my cooking experience! The recipes are easy to follow and the variety is amazing. Highly recommend!"
+            username="Marc Espinoza"
+          />
+          <img src="/assets/hero-no-bg.png" alt="Vegetarian Stir-Fry image" />
+          <Testimonial
+            imageUrl="/assets/chef-1.jpg"
+            transformStyles="-bottom-10 left-1/2 translate-x-1/5"
+            testimonial="Best recipe website out there. They have several dishes with easy to follow instructions"
+            username="Keanu Reeves"
+          />
         </div>
       </section>
       <Cook />
@@ -104,6 +99,8 @@ function RouteComponent() {
           ))}
         </div>
       </div>
+      {/* Cuisine Display */}
+      {/* <CuisineDisplay /> */}
       {/* Waiting */}
       <Waiting />
     </main>

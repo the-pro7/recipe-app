@@ -32,7 +32,7 @@ export default function RecipeCard({
       <CardContent>
         <div className="relative">
           <img src={image} alt={title} className="rounded-lg w-full h-full" />
-          <div className="flex flex-wrap justify-between left-0 right-0 absolute top-0 m-3">
+          <div className="flex flex-wrap gap-1 justify-between left-0 right-0 absolute top-0 m-3">
             <span className="inline-flex bg-white px-4 py-1 rounded-full">
               <HugeiconsIcon icon={Eye} />
               {reviewCount}+ Reviews

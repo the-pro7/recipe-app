@@ -3,12 +3,12 @@ import { Button } from "./ui/button";
 
 export default function Footer() {
   return (
-    <div className="flex items-center gap-4 justify-around bg-slate-900 text-white mt-10 rounded-lg p-10 relative overflow-clip">
+    <div className="flex-col md:flex-row flex items-center gap-4 justify-around bg-slate-900 text-white mt-10 rounded-lg p-10 relative overflow-clip">
       <img src="/assets/fish.svg" alt="Fish" className="absolute w-15 h-15 top-0 right-0 rotate-45 translate-x-6"/>
       <img src="/assets/watermelon.svg" alt="Watermelon" className="absolute w-15 h-15 top-0 left-0 rotate-45 -translate-x-3"/>
       <div>
         <h1 className="font-black tracking-wide text-4xl">FoodLearn</h1>
-        <span className="text-slate-400 font-semibold">
+        <span className="text-slate-400 font-semibold text-center md:text-left">
           <Link to="." href="https://www.github.com/the-pro7">
             Emmanuel Ameyaw
           </Link>

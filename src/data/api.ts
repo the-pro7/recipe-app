@@ -59,3 +59,19 @@ export async function getAllCuisines() {
     throw new Error("Failed to fetch cuisines");
   }
 }
+
+
+// Search recipe
+export async function searchRecipes(query: string) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_APP_API_ENDPOINT!}/search?q=${encodeURIComponent(query)}`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return (await response.json()) as Recipe[];
+  } catch (error) {
+    throw new Error("Failed to search recipes");
+  }
+}

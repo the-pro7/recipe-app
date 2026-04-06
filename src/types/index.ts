@@ -19,4 +19,7 @@ export interface Recipe {
 
 export interface Recipes {
   recipes: Recipe[];
+  skip: number;
+  total: number;
+  limit: number;
 }

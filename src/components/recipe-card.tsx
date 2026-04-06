@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { cn } from "../lib/utils";
 
 interface RecipeCardProps {
+  id: number;
   name: string;
   reviewCount: number;
   difficulty: "Easy" | "Medium" | "Hard";
@@ -19,21 +20,29 @@ const difficultyColors = {
 };
 
 export default function RecipeCard({
+  id,
   name,
   reviewCount,
   difficulty,
   image,
 }: RecipeCardProps) {
   return (
-    <Card>
+    <Card title={name}>
       <CardHeader>
-        <h1 className="text-2xl text-slate-800 font-semibold">{name.slice(0, 15)}{name.length > 15 ? "..." : ""}</h1>
+        <h1 className="text-2xl text-slate-800 font-semibold">
+          {name.slice(0, 15)}
+          {name.length > 15 ? "..." : ""}
+        </h1>
       </CardHeader>
       <CardContent>
-        <div className="relative">
-          <img src={image} alt={name} className="rounded-lg w-full h-fullobject-cover" />
+        <div className="relative isolate">
+          <img
+            src={image}
+            alt={name}
+            className="rounded-lg w-full h-full object-cover"
+          />
           <div className="flex flex-wrap gap-1 justify-between left-0 right-0 absolute top-0 m-3">
-            <span className="inline-flex bg-white gap-1 px-4 py-1 rounded-full">
+            <span className="inline-flex bg-white gap-1 px-2 py-1 rounded-full">
               <HugeiconsIcon icon={Eye} />
               {reviewCount}+ Reviews
             </span>
@@ -47,6 +56,7 @@ export default function RecipeCard({
             >
               {difficulty}
             </span>
+            <div className="absolute inset-0 w-fill h-full -z-100"/>
           </div>
         </div>
       </CardContent>
@@ -56,7 +66,8 @@ export default function RecipeCard({
           className="w-full bg-emerald-500 hover:bg-emerald-800"
         >
           <Link
-            to="."
+            to="/recipes/$id"
+            params={{ id: String(id) }}
             className="inline-flex gap-2 items-center justify-between w-full"
           >
             <span>See full recipe</span>

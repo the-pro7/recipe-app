@@ -1,9 +1,19 @@
 import type { Recipe, Recipes } from "../types";
 
 // Get all recipes
-export async function getAllRecipes() {
+export async function getAllRecipes(page: number, mealType?: string) {
+  const offset = 10;
   try {
-    const response = await fetch(import.meta.env.VITE_APP_API_ENDPOINT!);
+    let response;
+    if (mealType && typeof mealType !== "undefined" && mealType !== "all") {
+      response = await fetch(
+        `${import.meta.env.VITE_APP_API_ENDPOINT!}/meal-type/${mealType}?limit=10&skip=${(page - 1) * offset}`,
+      );
+    } else {
+      response = await fetch(
+        `${import.meta.env.VITE_APP_API_ENDPOINT!}?limit=10&skip=${(page - 1) * offset}`,
+      );
+    }
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -60,12 +70,11 @@ export async function getAllCuisines() {
   }
 }
 
-
 // Search recipe
 export async function searchRecipes(query: string) {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_APP_API_ENDPOINT!}/search?q=${encodeURIComponent(query)}`
+      `${import.meta.env.VITE_APP_API_ENDPOINT!}/search?q=${encodeURIComponent(query)}`,
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

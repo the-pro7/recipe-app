@@ -36,8 +36,8 @@ export default function Cook() {
         {Array.from({ length: 10 }).map((_, index) => (
         <RecipeCard
           key={index}
-          difficulty="easy"
-          title="Macaroni Pizza"
+          difficulty="Easy"
+          name="Macaroni Pizza"
           reviewCount={100}
           image="/assets/step-1.jpg"
         />

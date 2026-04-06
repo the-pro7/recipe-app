@@ -16,3 +16,7 @@ export interface Recipe {
   reviewCount: number;
   mealType: string[] | string;
 }
+
+export interface Recipes {
+  recipes: Recipe[];
+}

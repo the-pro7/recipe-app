@@ -12,22 +12,29 @@ import RecipeCard from "../components/recipe-card";
 import { Button } from "../components/ui/button";
 import z from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
+import { getRecipesByCuisine } from "../data/api";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../components/ui/empty";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Pizza } from "@hugeicons/core-free-icons";
 
 const searchParamsSchema = z.object({
-  cuisine: z.string().optional(),
+  cuisine: z.string().optional().default("Asian"),
 });
 
 export const Route = createFileRoute("/cuisines/")({
   component: RouteComponent,
   validateSearch: zodValidator(searchParamsSchema),
-  beforeLoad: async () => {},
-  loaderDeps: async ({ search }) => {
+  loaderDeps: ({ search }) => {
     return {
       cuisine: search.cuisine,
     };
   },
   loader: async ({ deps }) => {
-    console.log((await deps).cuisine)
+    const recipes = await getRecipesByCuisine(deps.cuisine);
+
+    return {
+      recipes,
+    };
   },
 });
 
@@ -55,6 +62,10 @@ const cuisineTags = [
 ];
 
 function RouteComponent() {
+  const navigate = Route.useNavigate();
+  const { cuisine } = Route.useSearch();
+  const { recipes } = Route.useLoaderData();
+
   return (
     <main className="my-10">
       <div className="flex flex-col gap-3">
@@ -66,8 +77,17 @@ function RouteComponent() {
         </p>
       </div>
       <div className="my-7 flex items-center justify-between">
-        <h3 className="text-2xl font-bold text-slate-800">All cuisines</h3>
-        <Select>
+        <h3 className="text-3xl font-bold text-slate-800">{cuisine}</h3>
+        <Select
+          onValueChange={(value) => {
+            navigate({
+              from: Route.fullPath,
+              to: ".",
+              search: (prev) => ({ ...prev, cuisine: value }),
+            });
+          }}
+          defaultValue={cuisine}
+        >
           <SelectTrigger className="w-full max-w-48">
             <SelectValue placeholder="Select a cuisine" />
           </SelectTrigger>
@@ -84,19 +104,36 @@ function RouteComponent() {
         </Select>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 30 }).map((_, index) => (
-          <RecipeCard
-            key={index}
-            title="Hot Pepper Soup"
-            difficulty="medium"
-            reviewCount={300}
-            image="/assets/step-4.jpg"
-          />
-        ))}
+        {recipes.recipes && recipes.recipes.length > 0 ? (
+          recipes.recipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              name={recipe.name}
+              difficulty={recipe.difficulty}
+              reviewCount={recipe.reviewCount}
+              image={recipe.image}
+            />
+          ))
+        ) : (
+          <Empty className="bg-slate-200 rounded-lg p-4 flex flex-col mx-auto my-5">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <HugeiconsIcon icon={Pizza}/>
+              </EmptyMedia>
+              <EmptyTitle>No Recipe Found</EmptyTitle>
+              <EmptyDescription>
+                Try selecting a different cuisine or check back later.
+              </EmptyDescription>
+            </EmptyHeader>
+            {/* <EmptyContent>
+              <Button>Add data</Button>
+            </EmptyContent> */}
+          </Empty>
+        )}
       </div>
-      <Button className="mt-5 mx-auto cursor-pointer" size="lg">
+      {/* <Button className="mt-5 mx-auto cursor-pointer" size="lg">
         Load more
-      </Button>
+      </Button> */}
     </main>
   );
 }

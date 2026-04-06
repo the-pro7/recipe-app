@@ -6,9 +6,9 @@ import { Link } from "@tanstack/react-router";
 import { cn } from "../lib/utils";
 
 interface RecipeCardProps {
-  title: string;
+  name: string;
   reviewCount: number;
-  difficulty: "easy" | "medium" | "hard";
+  difficulty: "Easy" | "Medium" | "Hard";
   image: string;
 }
 
@@ -19,7 +19,7 @@ const difficultyColors = {
 };
 
 export default function RecipeCard({
-  title,
+  name,
   reviewCount,
   difficulty,
   image,
@@ -27,20 +27,22 @@ export default function RecipeCard({
   return (
     <Card>
       <CardHeader>
-        <h1 className="text-2xl text-slate-800 font-semibold">{title}</h1>
+        <h1 className="text-2xl text-slate-800 font-semibold">{name.slice(0, 15)}{name.length > 15 ? "..." : ""}</h1>
       </CardHeader>
       <CardContent>
         <div className="relative">
-          <img src={image} alt={title} className="rounded-lg w-full h-full" />
+          <img src={image} alt={name} className="rounded-lg w-full h-fullobject-cover" />
           <div className="flex flex-wrap gap-1 justify-between left-0 right-0 absolute top-0 m-3">
-            <span className="inline-flex bg-white px-4 py-1 rounded-full">
+            <span className="inline-flex bg-white gap-1 px-4 py-1 rounded-full">
               <HugeiconsIcon icon={Eye} />
               {reviewCount}+ Reviews
             </span>
             <span
               className={cn(
-                `capitalize font-semibold bg-white px-4 shadow-md py-1 rounded-full text-${difficultyColors[difficulty].split("-")[1]}-900`,
-                difficultyColors[difficulty],
+                `capitalize font-semibold bg-white px-4 shadow-md py-1 rounded-full text-${difficultyColors[difficulty.toLowerCase() as keyof typeof difficultyColors].split("-")[1]}-900`,
+                difficultyColors[
+                  difficulty.toLowerCase() as keyof typeof difficultyColors
+                ],
               )}
             >
               {difficulty}

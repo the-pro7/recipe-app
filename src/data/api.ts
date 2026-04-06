@@ -1,4 +1,4 @@
-import type { Recipe } from "../types";
+import type { Recipe, Recipes } from "../types";
 
 // Get all recipes
 export async function getAllRecipes() {
@@ -9,7 +9,7 @@ export async function getAllRecipes() {
       throw new Error("Network response was not ok");
     }
 
-    return (await response.json()) as Recipe[];
+    return (await response.json()) as Recipes;
   } catch (error) {
     throw new Error("Failed to fetch recipes");
   }
@@ -24,7 +24,7 @@ export async function getRecipesByCuisine(cuisine: string) {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    return (await response.json()) as Recipe[];
+    return (await response.json()) as Recipes;
   } catch (error) {
     throw new Error("Failed to fetch recipes by cuisine");
   }
@@ -70,7 +70,7 @@ export async function searchRecipes(query: string) {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    return (await response.json()) as Recipe[];
+    return (await response.json()) as Recipes;
   } catch (error) {
     throw new Error("Failed to search recipes");
   }

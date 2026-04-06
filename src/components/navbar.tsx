@@ -7,6 +7,7 @@ import {
   Pizza,
   SearchIcon,
 } from "@hugeicons/core-free-icons";
+import SearchBox from "./search-box";
 
 export default function Navbar() {
   return (
@@ -42,15 +43,7 @@ export default function Navbar() {
           </Link>
         </li>
       </ul>
-      <div className="flex gap-3 items-center p-2 rounded-full bg-slate-200 ml-auto">
-        <HugeiconsIcon icon={SearchIcon} className="text-slate-800" />
-        <input
-          type="search"
-          name="search"
-          id="search"
-          placeholder="Search recipes..."
-        />
-      </div>
+     <SearchBox />
     </nav>
   );
 }

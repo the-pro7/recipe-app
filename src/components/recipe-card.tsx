@@ -41,10 +41,10 @@ export default function RecipeCard({
             alt={name}
             className="rounded-lg w-full h-full object-cover"
           />
-          <div className="flex flex-wrap gap-1 justify-between left-0 right-0 absolute top-0 m-3">
+          <div className="flex flex-wrap-reverse flex-row-reverse gap-1 justify-between left-0 right-0 absolute top-0 m-3">
             <span className="inline-flex bg-white gap-1 px-2 py-1 rounded-full">
               <HugeiconsIcon icon={Eye} />
-              {reviewCount}+ Reviews
+              {reviewCount}+
             </span>
             <span
               className={cn(
@@ -56,7 +56,7 @@ export default function RecipeCard({
             >
               {difficulty}
             </span>
-            <div className="absolute inset-0 w-fill h-full -z-100"/>
+            <div className="absolute inset-0 w-fill h-full -z-100" />
           </div>
         </div>
       </CardContent>

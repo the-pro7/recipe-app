@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import RecipeCard from "./recipe-card";
 import { Button } from "./ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { getAllRecipes } from "../data/api";
 
 const mealTypes = [
   "All Types",
@@ -15,6 +17,13 @@ const mealTypes = [
 ];
 
 export default function Cook() {
+  // const {} = useQuery({
+  //   queryKey: ['home-recipes'],
+  //   queryFn: getAllRecipes
+  // })
+
+
+  
   return (
     <section>
       <div className="flex items-center justify-center flex-col gap-10">
@@ -33,8 +42,9 @@ export default function Cook() {
         </div>
       </div>
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 6 }).map((_, index) => (
         <RecipeCard
+        id={1}
           key={index}
           difficulty="Easy"
           name="Macaroni Pizza"

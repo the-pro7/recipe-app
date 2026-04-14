@@ -84,3 +84,26 @@ export async function searchRecipes(query: string) {
     throw new Error("Failed to search recipes");
   }
 }
+
+// Get by meal type for home page
+export async function getRecipesByMealType(mealType: string) {
+  try {
+    let response;
+
+    if (mealType !== "all") {
+      response = await fetch(
+        `${import.meta.env.VITE_APP_API_ENDPOINT!}/meal-type/${mealType}?limit=10`,
+      );
+    } else {
+      response = await fetch(
+        `${import.meta.env.VITE_APP_API_ENDPOINT!}?limit=10`,
+      );
+    }
+
+    if (!response.ok) throw new Error("Couldn't get recipes by meal type");
+
+    return (await response.json()) as Recipes;
+  } catch (error) {
+    throw new Error("Where are your meals??");
+  }
+}

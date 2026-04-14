@@ -15,7 +15,7 @@ import {
 } from "../components/ui/empty";
 import { Button } from "../components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Pizza } from "@hugeicons/core-free-icons";
+import { Pizza, Refresh01FreeIcons } from "@hugeicons/core-free-icons";
 // import { Button } from "../components/ui/button";
 
 const recipesSearchParams = z.object({
@@ -25,6 +25,15 @@ const recipesSearchParams = z.object({
 
 export const Route = createFileRoute("/recipes/")({
   component: RouteComponent,
+  errorComponent: ({ reset, error }) => (
+    <div className="min-h-100 flex flex-col gap-3 items-center justify-center">
+      <h1 className="text-4xl font-semibold">Error: {error.message}</h1>
+      <Button onClick={reset}>
+        <HugeiconsIcon icon={Refresh01FreeIcons} />
+        Retry
+      </Button>
+    </div>
+  ),
   validateSearch: zodValidator(recipesSearchParams),
   beforeLoad: () => {
     return {

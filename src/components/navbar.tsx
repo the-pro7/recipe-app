@@ -8,6 +8,7 @@ import {
   SearchIcon,
 } from "@hugeicons/core-free-icons";
 import SearchBox from "./search-box";
+import { Badge } from "./ui/badge";
 
 export default function Navbar() {
   return (
@@ -40,10 +41,11 @@ export default function Navbar() {
           <Link to="/favorites" className="nav-link">
             <HugeiconsIcon icon={Heart} />
             Favorites
+            <Badge>NEW</Badge>
           </Link>
         </li>
       </ul>
-     <SearchBox />
+      <SearchBox />
     </nav>
   );
 }

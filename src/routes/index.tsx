@@ -32,12 +32,12 @@ export const cuisines = [
 function RouteComponent() {
   return (
     <main>
-      <section className="my-10 flex items-center justify-between h-[70vh]">
-        <div>
+      <section className="mb-15 md:my-10 flex flex-col md:flex-row items-center justify-between md:h-[70vh]">
+        <div className="flex items-center flex-col justify-center my-5 md:block md:my-0">
           <h1 className="text-6xl font-bold max-w-xl leading-15 text-slate-800">
             Cooking made fun and easy: Unleash your inner chef
           </h1>
-          <p className="text-xl font-light max-w-md mt-5">
+          <p className="self-start text-xl font-light max-w-md mt-5">
             Discover over{" "}
             <span className="text-blue-500 font-semibold">100+</span> delicious
             recipes from all around the world, tailored to your taste and
@@ -55,18 +55,6 @@ function RouteComponent() {
             </Button>
           </div>
         </div>
-        {/* <div className="relative">
-          <div className="w-100 h-100 aspect-square rounded-full translate-x-1 delay-500 overflow-clip">
-            <img
-              src="/assets/main-bg.jpg"
-              alt="Main background"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="w-50 h-50 aspect-square rounded-full -translate-x-50 -translate-y-50 delay-500 overflow-clip">
-            <img src="/assets/secondary-bg.jpg" alt="Secondary background" />
-          </div>
-        </div> */}
         <div className="relative">
           <Testimonial
             imageUrl="/assets/chef-2.jpg"
@@ -83,6 +71,7 @@ function RouteComponent() {
           />
         </div>
       </section>
+      {/* Cook */}
       <Cook />
       <Favorite />
       {/* Stats */}

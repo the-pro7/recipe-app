@@ -13,9 +13,16 @@ import { Button } from "../components/ui/button";
 import z from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { getRecipesByCuisine } from "../data/api";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../components/ui/empty";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "../components/ui/empty";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Pizza } from "@hugeicons/core-free-icons";
+import { Pizza, Refresh01FreeIcons } from "@hugeicons/core-free-icons";
 
 const searchParamsSchema = z.object({
   cuisine: z.string().optional().default("Asian"),
@@ -23,6 +30,15 @@ const searchParamsSchema = z.object({
 
 export const Route = createFileRoute("/cuisines/")({
   component: RouteComponent,
+  errorComponent: ({ reset, error }) => (
+    <div className="min-h-100 flex flex-col gap-3 items-center justify-center">
+      <h1 className="text-4xl font-semibold">Error: {error.message}</h1>
+      <Button onClick={reset}>
+        <HugeiconsIcon icon={Refresh01FreeIcons} />
+        Retry
+      </Button>
+    </div>
+  ),
   validateSearch: zodValidator(searchParamsSchema),
   loaderDeps: ({ search }) => {
     return {
@@ -107,6 +123,7 @@ function RouteComponent() {
         {recipes.recipes && recipes.recipes.length > 0 ? (
           recipes.recipes.map((recipe) => (
             <RecipeCard
+              id={recipe.id}
               key={recipe.id}
               name={recipe.name}
               difficulty={recipe.difficulty}
@@ -118,7 +135,7 @@ function RouteComponent() {
           <Empty className="bg-slate-200 rounded-lg p-4 flex flex-col mx-auto my-5">
             <EmptyHeader>
               <EmptyMedia variant="icon">
-                <HugeiconsIcon icon={Pizza}/>
+                <HugeiconsIcon icon={Pizza} />
               </EmptyMedia>
               <EmptyTitle>No Recipe Found</EmptyTitle>
               <EmptyDescription>

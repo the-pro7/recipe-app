@@ -1,6 +1,11 @@
-import { Search, SearchIcon } from "@hugeicons/core-free-icons";
+import {
+  Home,
+  Refresh01FreeIcons,
+  Search,
+  SearchIcon,
+} from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
 import z from "zod";
 import { searchRecipes } from "../data/api";
@@ -22,6 +27,35 @@ const searchQuerySchema = z.object({
 
 export const Route = createFileRoute("/search/")({
   component: RouteComponent,
+  errorComponent: ({ error, reset }) => {
+    if (!navigator.onLine)
+      return (
+        <div>
+          <h1>You're not online</h1>
+        </div>
+      );
+
+    return (
+      <div className="flex flex-col items-center justify-center gap-5 min-h-100">
+        <h1 className="text-3xl font-semibold">
+          An error occurred why searching:{" "}
+          <span className="text-muted-foreground">{error.message ?? null}</span>
+        </h1>
+        <div className="flex gap-2 items-center">
+          <Button className="cursor-pointer" size="lg" onClick={reset}>
+            <HugeiconsIcon icon={Refresh01FreeIcons} />
+            Retry
+          </Button>
+          <Button variant="outline" size="sm" asChild className="cursor-pointer" size="lg" onClick={reset}>
+            <Link to="/">
+              <HugeiconsIcon icon={Home} />
+              Go home
+            </Link>
+          </Button>
+        </div>
+      </div>
+    );
+  },
   beforeLoad: () => {
     return {
       searchRecipes,
@@ -69,7 +103,7 @@ function RouteComponent() {
         </Badge>
       </div>
       {recipes.recipes.length > 0 ? (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 outline">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
           {recipes.recipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}

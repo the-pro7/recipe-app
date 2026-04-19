@@ -13,10 +13,10 @@ interface RecipeCardProps {
   image: string;
 }
 
-const difficultyColors = {
-  easy: "bg-green-400",
-  medium: "bg-yellow-400",
-  hard: "bg-red-400",
+export const difficultyColors = {
+  easy: "bg-green-400 text-green-800",
+  medium: "bg-yellow-400 text-yellow-800",
+  hard: "bg-red-400 text-red-800",
 };
 
 export default function RecipeCard({

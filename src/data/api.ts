@@ -44,7 +44,21 @@ export async function getRecipesByCuisine(cuisine: string) {
 export async function getRecipeById(id: number) {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_APP_API_ENDPOINT!}/id/${id}`,
+      `${import.meta.env.VITE_APP_API_ENDPOINT!}/${id}`,
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return (await response.json()) as Recipe;
+  } catch (error) {
+    throw new Error("Failed to fetch recipe by ID");
+  }
+}
+// Get recipe by ID
+export async function getUserById(id: number) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_APP_USERS_API_ENDPOINT!}/${id}`,
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

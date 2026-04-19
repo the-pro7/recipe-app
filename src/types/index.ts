@@ -9,7 +9,7 @@ export interface Recipe {
   difficulty: "Medium" | "Hard" | "Easy";
   cuisine: string;
   caloriesPerServing: number;
-  tags: string[];
+  tags: string[];na
   userId: number;
   image: string;
   rating: number;

@@ -27,6 +27,7 @@ export default function SearchBox() {
         type="search"
         name="search"
         id="search"
+        className="w-full"
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search recipes..."
       />

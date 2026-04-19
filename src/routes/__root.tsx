@@ -11,7 +11,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
-      <div className="container p-7 overflow-clip">
+      <div className="container p-7 overflow-clip min-w-full">
         <header>
           <Navbar />
         </header>

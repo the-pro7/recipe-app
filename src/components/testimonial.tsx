@@ -27,7 +27,7 @@ export default function Testimonial({
                 <HugeiconsIcon key={index} icon={Star} className="text-yellow-500 text-xs"/>
             ))}
         </span>
-        <p className="text-slate-700 font-semibold text-sm">"{testimonial}"</p>
+        <p className="text-slate-700 font-semibold text-xs lg:text-sm">"{testimonial}"</p>
       </div>
       <div className="flex gap-2 items-center">
         <img src={imageUrl} alt={username} className="w-10 h-10 rounded-full object-cover" />

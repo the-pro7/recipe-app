@@ -14,7 +14,7 @@ export default function Footer() {
           </Link>
         </span>
       </div>
-      <div className="inline-flex gap-3 items-center">
+      <div className="inline-flex flex-wrap gap-3 items-center justify-center md:justify-start">
         <p>&copy; 2026 FoodLearn. All rights reserved.</p>
         <p>Powered by: Tanstack Router</p>
       </div>

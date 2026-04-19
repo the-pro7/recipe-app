@@ -29,14 +29,13 @@ export default function Cook() {
 
   const {
     data: recipes,
+    refetch,
     isLoading,
     error,
   } = useQuery({
     queryKey: ["home-recipes", mealType],
     queryFn: () => getRecipesByMealType(mealType),
   });
-
-  if (error) return <h1>An error occurred</h1>;
 
   return (
     <section className="mt-10 md:mt-0">
@@ -69,23 +68,32 @@ export default function Cook() {
           ))}
         </div>
       </div>
-      {isLoading ? (
-        <h1 className="mt-5 text-center text-3xl font-semibold text-slate-800">
-          Tasty treats coming up...
-        </h1>
-      ) : (
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {recipes?.recipes.map((recipe, _) => (
-            <RecipeCard
-              id={recipe.id}
-              key={recipe.id}
-              difficulty={recipe.difficulty}
-              name={recipe.name}
-              reviewCount={recipe.reviewCount}
-              image={recipe.image}
-            />
-          ))}
+      {error ? (
+        <div className="mt-5 text-center text-3xl font-semibold text-slate-800">
+          <h1>Can't display tasty treats rights now :(</h1>
+          <Button onClick={() => refetch()}>Retry</Button>
         </div>
+      ) : (
+        <>
+          {isLoading ? (
+            <h1 className="mt-5 text-center text-3xl font-semibold text-slate-800">
+              Tasty treats coming up...
+            </h1>
+          ) : (
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {recipes?.recipes.map((recipe, _) => (
+                <RecipeCard
+                  id={recipe.id}
+                  key={recipe.id}
+                  difficulty={recipe.difficulty}
+                  name={recipe.name}
+                  reviewCount={recipe.reviewCount}
+                  image={recipe.image}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
       <Button asChild size="lg" className="my-7 ml-auto">
         <Link to="/recipes">All Recipes</Link>

@@ -11,9 +11,7 @@ import Testimonial from "../components/testimonial";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
-  loader: async () => {
-
-  }
+  loader: async () => {},
 });
 
 export const cuisines = [
@@ -31,10 +29,10 @@ export const cuisines = [
 
 function RouteComponent() {
   return (
-    <main>
+    <>
       <section className="mb-15 md:my-10 flex flex-col md:flex-row items-center justify-between md:h-[70vh]">
         <div className="flex items-center flex-col justify-center my-5 md:block md:my-0">
-          <h1 className="text-6xl font-bold max-w-xl leading-15 text-slate-800">
+          <h1 className="text-6xl font-bold md:max-w-xl leading-15 text-slate-800 text-center md:text-left">
             Cooking made fun and easy: Unleash your inner chef
           </h1>
           <p className="self-start text-xl font-light max-w-md mt-5">
@@ -58,7 +56,7 @@ function RouteComponent() {
         <div className="relative">
           <Testimonial
             imageUrl="/assets/chef-2.jpg"
-            transformStyles="top-13 -left-8 -translate-x-1/5"
+            transformStyles="lg:top-13 lg:-left-8 lg:-translate-x-1/5"
             testimonial="This website has transformed my cooking experience! The recipes are easy to follow and the variety is amazing. Highly recommend!"
             username="Marc Espinoza"
           />
@@ -92,6 +90,6 @@ function RouteComponent() {
       {/* <CuisineDisplay /> */}
       {/* Waiting */}
       <Waiting />
-    </main>
+    </>
   );
 }

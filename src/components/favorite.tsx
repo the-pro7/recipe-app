@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 export default function Favorite() {
   return (
     <section className="mt-10 bg-slate-900 rounded-md p-10">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-col md:flex-row gap-10 md:gap-0">
         <div>
           <span className="bg-white text-slate-900 rounded-full px-7 py-1 tracking-wider font-semibold">
             Easy
